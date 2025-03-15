@@ -4,6 +4,7 @@ BEGIN
 END
 GO
 USE bd_tercerizados
+GO
 
 CREATE TABLE tipos_usuarios(
 	id int primary key identity(1,1),
