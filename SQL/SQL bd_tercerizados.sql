@@ -111,6 +111,14 @@ CREATE TABLE movimientos(
 	estado bit not null default 1
 )
 
+CREATE TABLE presentaciones_productos(
+	id int primary key identity(1,1),
+	id_producto int not null foreign key references productos(id),
+	id_unidad_medida int not null foreign key references unidades_medida(id),
+	cantidad_unidad_base decimal(10,4) not null,
+	estado bit not null default 1
+)
+
 create table auditoria(
 	id INT PRIMARY KEY IDENTITY(1,1),
     tabla_afectada VARCHAR(50),
