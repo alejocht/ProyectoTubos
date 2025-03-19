@@ -69,7 +69,7 @@ AS
 BEGIN
 	BEGIN TRANSACTION
 		BEGIN TRY
-			INSERT INTO depositos (nombre, observacion, id_tipo_deposito) values (@nombre_input, @observacion, @id_tipo_deposito)
+			INSERT INTO depositos (nombre, descripcion, id_tipo_deposito) values (@nombre_input, @observacion, @id_tipo_deposito)
 			declare @id_inserted int
 			set @id_inserted = SCOPE_IDENTITY()
 			exec SP_InsertarAuditoria 'depositos', @id_inserted,'INSERT', @id_usuario;
@@ -143,10 +143,82 @@ BEGIN
 	BEGIN TRY
 	INSERT INTO muebles_detalle(id_producto, familia) VALUES (@id_producto, @familia);
 	DECLARE @id_inserted INT
-	SET @id_inserted INT
 	SET @id_inserted = SCOPE_IDENTITY()
 	EXEC SP_InsertarAuditoria 'muebles_detalle', @id_inserted, 'INSERT', @id_usuario;
 	COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+	ROLLBACK TRANSACTION
+	THROW
+	END CATCH
+END;
+GO
+
+-- AGREGAR TABLAS INTERMEDIAS
+
+CREATE PROCEDURE SP_AgregarProductosXFormula(@idformula int, @idproducto int, @cantidad decimal(10,4), @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		INSERT INTO productos_x_formula(id_formula, id_producto, cantidad) values (@idformula, @idproducto, @cantidad);
+		DECLARE @id_inserted INT
+		SET @id_inserted = SCOPE_IDENTITY()
+		EXEC SP_InsertarAuditoria 'productos_x_formula', @id_inserted, 'INSERT', @idusuario;
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+	ROLLBACK TRANSACTION
+	THROW
+	END CATCH
+END;
+GO
+
+CREATE PROCEDURE SP_AgregarProductosXDeposito(@idproducto int, @iddeposito int, @saldo decimal(10,4))
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		INSERT INTO productos_x_deposito(id_producto, id_deposito, saldo) VALUES (@idproducto, @iddeposito,@saldo);
+		DECLARE @id_inserted INT
+		SET @id_inserted = SCOPE_IDENTITY()
+		EXEC SP_InsertarAuditoria 'productos_x_deposito', @id_inserted, 'INSERT', @idusuario;
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+	ROLLBACK TRANSACTION
+	THROW
+	END CATCH
+END;
+GO
+
+CREATE PROCEDURE SP_AgregarPresentacionesProducto(@idproducto int, @idunidadmedida int, @cantidad decimal(10,4), @idusuario int )
+AS
+BEGIN 
+	BEGIN TRANSACTION
+	BEGIN TRY
+		INSERT INTO presentaciones_productos(@idproducto int, @idunidadmedida int, @cantidad decimal(10,4), @idusuario int);
+		DECLARE @id_inserted int;
+		set @id_inserted = SCOPE_IDENTITY();
+		EXEC SP_InsertarAuditoria 'presentaciones Productos',@id_inserted, 'INSERT', @idusuario;
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+	ROLLBACK TRANSACTION
+	THROW
+	END CATCH
+END
+
+CREATE PROCEDURE SP_AgregarMovimientos(@fecha datetime, @idproducto int, @cantidad decimal(10,4), @idtipomovimiento int, @iddepositoorigen int, @iddepositodestino int, @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		INSERT INTO movimientos(fecha, id_producto, cantidad, id_tipo_movimiento, id_deposito_origen, id_deposito_destino) VALUES (@fecha, @idproducto, @cantidad, @idtipomovimiento, @iddepositoorigen, @iddepositodestino)
+		DECLARE @id_inserted INT
+		SET @id_inserted = SCOPE_IDENTITY()
+		EXEC SP_InsertarAuditoria 'movimientos', @id_inserted, 'INSERT', @idusuario;
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
 	ROLLBACK TRANSACTION
@@ -326,6 +398,24 @@ BEGIN
 	BEGIN TRY
 		UPDATE muebles_detalle SET id_producto = @id_producto, familia = @familia where id = @id
 		EXEC SP_InsertarAuditoria 'muebles_detalle', @id, 'UPDATE', @id_usuario
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		THROW
+	END CATCH
+END;
+GO
+
+-- MODIFICAR TABLAS INTERMEDIAS
+
+CREATE PROCEDURE SP_ModificarProductosXFormula(@id int,@idformula int, @idproducto int, @cantidad decimal(10,4), @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE productos_x_formula set id_formula = @idformula, id_producto = @idproducto, cantidad = @cantidad where id = @id;
+		EXEC SP_InsertarAuditoria 'productos_x_formula', @id, 'UPDATE', @idusuario;
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH

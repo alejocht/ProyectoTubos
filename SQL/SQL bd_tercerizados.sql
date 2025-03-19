@@ -85,19 +85,21 @@ CREATE TABLE muebles_detalle(
 )
 
 CREATE TABLE productos_x_formula(
+	id int primary key identity(1,1),
 	id_formula int not null foreign key references formulas(id),
 	id_producto int not null foreign key references productos(id),
 	cantidad decimal(10,4) not null,
 	estado bit not null default 1,
-	primary key(id_formula, id_producto)
+	
 )
 
 CREATE TABLE productos_x_deposito(
+	id int primary key identity(1,1),
 	id_producto int not null foreign key references productos(id),
 	id_deposito int not null foreign key references depositos(id),
 	saldo decimal(10,4) not null default 0,
 	estado bit not null default 1
-	primary key(id_producto, id_deposito)
+	
 )
 
 CREATE TABLE movimientos(
