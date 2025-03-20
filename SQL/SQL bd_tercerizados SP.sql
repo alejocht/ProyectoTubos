@@ -208,6 +208,7 @@ BEGIN
 	THROW
 	END CATCH
 END
+GO
 
 CREATE PROCEDURE SP_AgregarMovimientos(@fecha datetime, @idproducto int, @cantidad decimal(10,4), @idtipomovimiento int, @iddepositoorigen int, @iddepositodestino int, @idusuario int)
 AS
@@ -425,6 +426,54 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE SP_ModificarProductosXDeposito(@id int, @idproducto int, @iddeposito int, @cantidad decimal(10,4), @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE productos_x_deposito SET id_producto = @idproducto, id_deposito = @iddeposito, saldo = @cantidad WHERE id = @id;
+		EXEC SP_InsertarAuditoria 'productos_x_deposito', @id, 'UPDATE', @idusuario;
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION;
+		THROW;
+	END CATCH
+END;
+GO
+
+CREATE PROCEDURE SP_ModificarMovimientos(@id int, @fecha datetime, @idproducto int, @cantidad decimal(10,4), @idtipomovimiento int, @iddepositoorigen int, @iddepositodestino int, @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE movimientos SET fecha = @fecha, id_producto = @idproducto, cantidad = @cantidad, id_tipo_movimiento = @idtipomovimiento, id_deposito_origen = @iddepositoorigen, id_deposito_destino = @iddepositodestino where id = @id;
+		EXEC SP_InsertarAuditoria 'movimientos', @id, 'UPDATE', @idusuario;
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		THROW
+	END CATCH
+END
+GO
+
+CREATE PROCEDURE SP_ModificarPresentacionesProductos(@id int, @idproducto int, @idunidadmedida int, @cantidadunidadbase decimal(10,4), @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE presentaciones_productos SET id_producto = @idproducto, id_unidad_medida = @idunidadmedida, cantidad_unidad_base = @cantidadunidadbase where id = @id;
+		EXEC SP_InsertarAuditoria 'presentaciones_productos', @id, 'UPDATE', @idusuario
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		THROW
+	END CATCH
+END
+GO
+
 -- ELIMINAR TIPOS
 CREATE PROCEDURE SP_EliminarTipoUsuario(@id int, @id_usuario int)
 AS
@@ -442,6 +491,20 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE SP_EliminarPresentacionesProductos(@id int, @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE presentaciones_productos set estado = 0 where id = @id;
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		THROW
+	END CATCH
+END;
+GO
 CREATE PROCEDURE SP_EliminarTipoDeposito(@id int, @id_usuario int)
 AS
 BEGIN
@@ -603,6 +666,73 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE SP_EliminarTipoMovimientos(@id int, @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE tipos_movimientos SET estado = 0 WHERE id = @id
+		EXEC SP_InsertarAuditoria 'tipos_movimientos', @id, 'DELETE', @idusuario;
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		THROW
+	END CATCH;
+END;
+GO
+
+CREATE PROCEDURE SP_EliminarProductosXDeposito(@id int, @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE productos_x_deposito SET estado = 0 WHERE id = @id
+		EXEC SP_InsertarAuditoria 'productos_x_deposito', @id, 'DELETE', @idusuario
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		THROW;
+	END CATCH
+
+END
+GO
+
+CREATE PROCEDURE SP_EliminarProductosXFormula(@id int, @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE productos_x_formula SET estado = 0 WHERE id = @id
+		EXEC SP_InsertarAuditoria 'productos_x_formula', @id, 'DELETE', @idusuario
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		THROW;
+	END CATCH
+
+END
+GO
+
+CREATE PROCEDURE SP_EliminarMovimiento(@id int, @idusuario int)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		UPDATE movimientos SET estado = 0 WHERE id = @id
+		EXEC SP_InsertarAuditoria 'movimientos', @id, 'DELETE', @idusuario
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		THROW;
+	END CATCH
+
+END
+GO
+
 -- SELECCION TIPOS
 CREATE PROCEDURE SP_ObtenerTiposUsuarios
 AS
@@ -639,6 +769,86 @@ BEGIN
     SELECT * FROM usuarios WHERE estado = 1;
 END;
 GO
+
+CREATE PROCEDURE SP_ObtenerDepositos
+AS
+BEGIN
+    SELECT * FROM depositos WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerMueblesDetalle
+AS
+BEGIN
+    SELECT * FROM muebles_detalle WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerTubosDetalle
+AS
+BEGIN
+    SELECT * FROM tubos_detalle WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerUnidadesMedida
+AS
+BEGIN
+    SELECT * FROM unidades_medida WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerFormula
+AS
+BEGIN
+    SELECT * FROM formulas WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerProductosXDeposito
+AS
+BEGIN
+    SELECT * FROM productos_x_deposito WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerProductosXFormula
+AS
+BEGIN
+    SELECT * FROM productos_x_formula WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerMovimientos
+AS
+BEGIN
+    SELECT * FROM movimientos WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerPresentacionesProductos
+AS
+BEGIN
+    SELECT * FROM presentaciones_productos WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerTiposMovimientos
+AS
+BEGIN
+    SELECT * FROM tipos_movimientos WHERE estado = 1;
+END;
+GO
+
+CREATE PROCEDURE SP_ObtenerTiposProductos
+AS
+BEGIN
+    SELECT * FROM tipos_depositos WHERE estado = 1;
+END;
+GO
+
+
+
 
 
 
