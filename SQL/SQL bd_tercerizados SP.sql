@@ -174,7 +174,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE SP_AgregarProductosXDeposito(@idproducto int, @iddeposito int, @saldo decimal(10,4))
+CREATE PROCEDURE SP_AgregarProductosXDeposito(@idproducto int, @iddeposito int, @saldo decimal(10,4), @idusuario int)
 AS
 BEGIN
 	BEGIN TRANSACTION
@@ -197,7 +197,7 @@ AS
 BEGIN 
 	BEGIN TRANSACTION
 	BEGIN TRY
-		INSERT INTO presentaciones_productos(@idproducto int, @idunidadmedida int, @cantidad decimal(10,4), @idusuario int);
+		INSERT INTO presentaciones_productos(id_producto, id_unidad_medida, cantidad_unidad_base) VALUES(@idproducto, @idunidadmedida, @cantidad);
 		DECLARE @id_inserted int;
 		set @id_inserted = SCOPE_IDENTITY();
 		EXEC SP_InsertarAuditoria 'presentaciones Productos',@id_inserted, 'INSERT', @idusuario;
