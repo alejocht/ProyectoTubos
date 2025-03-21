@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class Deposito
+    public class Deposito
     {
+        private int id;
+        private string nombre;
+        private string descripcion;
+        private TipoDeposito tipoDeposito;
+        private List<ElementoContable> elementosDeDeposito;
     }
 }

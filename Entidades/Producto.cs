@@ -8,12 +8,12 @@ namespace Entidades
 {
     public class Producto
     {
-		int id;
-		string nombre;
-		string codigo;
-		string descripcion;
-		int id_unidad_medida; //tiene que ser clase unidad medida
-		int id_tipo_producto; //tiene que ser clase tipo producto
-        bool estado;
+		private int id;
+		private string nombre;
+		private string codigo;
+		private string descripcion;
+		private UnidadMedida unidadMedida; 
+		private TipoProducto tipoProducto;
+        private bool estado;
     }
 }

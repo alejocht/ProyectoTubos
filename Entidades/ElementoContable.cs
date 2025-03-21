@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Movimiento
+    public class ElementoContable
     {
+        private Producto producto;
+        private decimal cantidad;
     }
 }
