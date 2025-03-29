@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class TipoMovimiento
+    public class TipoMovimiento : TipoGenerico
     {
     }
 }

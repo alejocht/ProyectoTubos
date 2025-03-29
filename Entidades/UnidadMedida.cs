@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class UnidadMedida
+    public class UnidadMedida : TipoGenerico
     {
     }
 }

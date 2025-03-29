@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class TipoDeposito
-    {
+    public class TipoDeposito : TipoGenerico
+    { 
     }
 }

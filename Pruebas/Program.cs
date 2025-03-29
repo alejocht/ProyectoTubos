@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entidades
+namespace Pruebas
 {
-    public class ElementoContable
+    internal class Program
     {
-        private Producto producto;
-        private decimal cantidad;
+        static void Main(string[] args)
+        {
+        }
     }
 }

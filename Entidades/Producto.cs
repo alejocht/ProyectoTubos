@@ -8,12 +8,29 @@ namespace Entidades
 {
     public class Producto
     {
-		private int id;
-		private string nombre;
-		private string codigo;
-		private string descripcion;
-		private UnidadMedida unidadMedida; 
-		private TipoProducto tipoProducto;
-        private bool estado;
+        public Producto()
+        {
+        }
+
+        public int id {  get; set; }
+        public string nombre { get; set; }
+        public string codigo { get; set; }
+        public string descripcion {  get; set; }
+        public UnidadMedida unidadMedida { get; set; }
+        public TipoProducto tipoProducto { get; set; }
+        public decimal stock { get; set; }
+        public bool estado { get; set; }
+
+        public Producto(int id, string nombre, string codigo, string descripcion, UnidadMedida unidadMedida, TipoProducto tipoProducto, decimal stock, bool estado)
+        {
+            this.id = id;
+            this.nombre = nombre;
+            this.codigo = codigo;
+            this.descripcion = descripcion;
+            this.unidadMedida = unidadMedida;
+            this.tipoProducto = tipoProducto;
+            this.stock = stock;
+            this.estado = estado;
+        }
     }
 }

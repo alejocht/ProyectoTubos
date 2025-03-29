@@ -3,7 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controlador", "Controlador.csproj", "{687364DD-2D93-4D82-83DC-BDD047242E35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vista Negocio", "Vista Negocio.csproj", "{687364DD-2D93-4D82-83DC-BDD047242E35}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D6FC546A-16E4-4753-9A2E-005BDD24EB2D} = {D6FC546A-16E4-4753-9A2E-005BDD24EB2D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "..\Entidades\Entidades.csproj", "{D6FC546A-16E4-4753-9A2E-005BDD24EB2D}"
 EndProject
