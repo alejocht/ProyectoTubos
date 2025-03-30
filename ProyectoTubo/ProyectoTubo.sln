@@ -12,7 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "..\Entidades\E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "..\Negocio\Negocio.csproj", "{62C696D5-0029-4B14-9C1A-11BBDD8CD3DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "..\DAO\DAO.csproj", "{45F8491A-94A0-4D12-AFD1-6C3ABE74615C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dao", "..\DAO\Dao.csproj", "{45F8491A-94A0-4D12-AFD1-6C3ABE74615C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaoImpl", "..\DaoImpl\DaoImpl.csproj", "{7C8524B1-A954-4F8D-9C15-CFF9183BDE31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "..\ConsoleApp\ConsoleApp.csproj", "{5113F044-9307-4031-9F42-4C10122F590B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +40,14 @@ Global
 		{45F8491A-94A0-4D12-AFD1-6C3ABE74615C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45F8491A-94A0-4D12-AFD1-6C3ABE74615C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45F8491A-94A0-4D12-AFD1-6C3ABE74615C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C8524B1-A954-4F8D-9C15-CFF9183BDE31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C8524B1-A954-4F8D-9C15-CFF9183BDE31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C8524B1-A954-4F8D-9C15-CFF9183BDE31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C8524B1-A954-4F8D-9C15-CFF9183BDE31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5113F044-9307-4031-9F42-4C10122F590B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5113F044-9307-4031-9F42-4C10122F590B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5113F044-9307-4031-9F42-4C10122F590B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5113F044-9307-4031-9F42-4C10122F590B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

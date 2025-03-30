@@ -16,10 +16,10 @@ namespace Entidades
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public TipoDeposito tipoDeposito { get; set; }
-        public List<StockProducto> productos { get; set; }
+        public List<ProductoEnDeposito> productos { get; set; }
         public bool estado {  get; set; }
 
-        public Deposito(int id, string nombre, string descripcion, TipoDeposito tipoDeposito, List<StockProducto> productos, bool estado)
+        public Deposito(int id, string nombre, string descripcion, TipoDeposito tipoDeposito, List<ProductoEnDeposito> productos, bool estado)
         {
             this.id = id;
             this.nombre = nombre;
