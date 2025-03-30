@@ -8,5 +8,7 @@ namespace Entidades
 {
     public class TipoProducto : TipoGenerico
     {
+        public TipoProducto() { }
+        public TipoProducto(int id, string descripcion, bool estado) : base(id, descripcion, estado) { }
     }
 }

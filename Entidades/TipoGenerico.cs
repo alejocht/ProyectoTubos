@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class TipoGenerico
+    public abstract class TipoGenerico
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }

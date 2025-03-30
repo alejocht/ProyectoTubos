@@ -8,5 +8,9 @@ namespace Entidades
 {
     public class TipoDeposito : TipoGenerico
     { 
+        public TipoDeposito() : base() {
+        }
+
+        public TipoDeposito(int id, string descripcion, bool estado) : base(id, descripcion, estado) { }
     }
 }

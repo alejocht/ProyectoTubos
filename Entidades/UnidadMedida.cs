@@ -8,5 +8,7 @@ namespace Entidades
 {
     public class UnidadMedida : TipoGenerico
     {
+        public UnidadMedida(){ }
+        public UnidadMedida(int id,  string descripcion, bool estado) : base(id, descripcion, estado) { }
     }
 }

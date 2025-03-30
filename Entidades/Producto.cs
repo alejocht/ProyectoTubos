@@ -18,10 +18,9 @@ namespace Entidades
         public string descripcion {  get; set; }
         public UnidadMedida unidadMedida { get; set; }
         public TipoProducto tipoProducto { get; set; }
-        public decimal stock { get; set; }
         public bool estado { get; set; }
 
-        public Producto(int id, string nombre, string codigo, string descripcion, UnidadMedida unidadMedida, TipoProducto tipoProducto, decimal stock, bool estado)
+        public Producto(int id, string nombre, string codigo, string descripcion, UnidadMedida unidadMedida, TipoProducto tipoProducto, bool estado)
         {
             this.id = id;
             this.nombre = nombre;
@@ -29,7 +28,6 @@ namespace Entidades
             this.descripcion = descripcion;
             this.unidadMedida = unidadMedida;
             this.tipoProducto = tipoProducto;
-            this.stock = stock;
             this.estado = estado;
         }
     }
