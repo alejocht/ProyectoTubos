@@ -21,7 +21,7 @@ namespace DaoImpl
 
         public AccesoDatosImpl()
         {
-            conexion = new SqlConnection("");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=bd_tercerizados; integrated security = true;");
             comando = new SqlCommand();
         }
 

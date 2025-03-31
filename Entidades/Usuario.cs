@@ -10,6 +10,7 @@ namespace Entidades
     {
         public Usuario()
         {
+            tipoUsuario = new TipoUsuario();
         }
         public int id {  get; set; }
         public string usuario { get; set; }
@@ -24,6 +25,10 @@ namespace Entidades
             this.contrasenia = contrasenia;
             this.tipoUsuario = tipoUsuario;
             this.estado = estado;
+        }
+        public override string ToString()
+        {
+            return "USUARIO[ ID: "+ id + " USUARIO: "+ usuario +" PASSWORD: "+ contrasenia +" ID TIPO USUARIO: "+ tipoUsuario.Id +" ESTADO: "+ estado +" ]";
         }
     }
 }

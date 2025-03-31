@@ -49,5 +49,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DaoImpl\DaoImpl.csproj">
+      <Project>{7c8524b1-a954-4f8d-9c15-cff9183bde31}</Project>
+      <Name>DaoImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{d6fc546a-16e4-4753-9a2e-005bdd24eb2d}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
