@@ -28,7 +28,7 @@ namespace Entidades
         }
         public override string ToString()
         {
-            return "USUARIO[ ID: "+ id + " USUARIO: "+ usuario +" PASSWORD: "+ contrasenia +" ID TIPO USUARIO: "+ tipoUsuario.Id +" ESTADO: "+ estado +" ]";
+            return "USUARIO[ ID: "+ id + " USUARIO: "+ usuario +" PASSWORD: ********"+ contrasenia +" ID TIPO USUARIO: "+ tipoUsuario.Id +" TIPO USUARIO DESCR: "+ tipoUsuario.Descripcion +" ESTADO: "+ estado +" ]";
         }
     }
 }

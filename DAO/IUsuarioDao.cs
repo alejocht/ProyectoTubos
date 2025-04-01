@@ -10,8 +10,8 @@ namespace Dao
     public interface IUsuarioDao
     {
         void agregarUsuario(Usuario usuario);
-        void modificarUsuario(Usuario usuario);
-        void eliminarUsuario(Usuario usuario);
+        void modificarUsuario(Usuario usuario, Usuario userLogged);
+        void eliminarUsuario(Usuario usuario, Usuario userLogged);
         Usuario listarUsuario(int id);
         List<Usuario> listarUsuarios();
 

@@ -13,8 +13,11 @@ namespace ConsoleApp
         {
             List<Usuario> users = new List<Usuario>();
             UsuarioDao dao = new UsuarioDao();
+            Usuario usuarioLog = new Usuario();
+            Usuario usuarioNuevo2 = new Usuario();
+            usuarioNuevo2.id = 3;
+            usuarioLog.id = 1;
             users = dao.listarUsuarios();
-            Console.WriteLine("HOLA");
             foreach (Usuario usuario in users)
             {
                 Console.WriteLine(usuario.ToString());
