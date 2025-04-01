@@ -17,7 +17,7 @@ namespace DaoImpl
         private const string spEliminar = "EXEC SP_EliminarUsuario @idusuarioEliminar, @idusuarioAuditoria";
         private const string spListarUsuario = "EXEC SP_ObtenerUsuario @idusuario";
         private const string spListar = "EXEC SP_ObtenerUsuarios";
-        private const string spModificar = "EXEC SP_ModificarUsuario @idusuarioModificar, @usuario, @contrasenia, @id_tipo_usuario, @idusuarioAuditoria";
+        private const string spModificar = "EXEC SP_ModificarUsuario @idusuarioModificar, @usuario, @id_tipo_usuario, @idusuarioAuditoria";
 
         public void agregarUsuario(Usuario usuario)
         {
@@ -61,7 +61,24 @@ namespace DaoImpl
 
         public Usuario listarUsuario(int id)
         {
-            throw new NotImplementedException();
+            AccesoDatos datos=new AccesoDatosImpl();
+            Usuario usuario = new Usuario();
+            try
+            {
+                datos.setConsulta(spListarUsuario);
+                datos.setParametro("@idusuario", id);
+                datos.execLectura();
+                usuario.id = (int)datos.Lector["id"];
+                usuario.usuario = (string)datos.Lector["usuario"];
+                usuario.tipoUsuario.Id = (int)datos.Lector["id_tipo_usuario"];
+                usuario.tipoUsuario.Descripcion = (string)datos.Lector["descripcion"];
+                usuario.estado = (bool)datos.Lector["estado"];
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally { datos.cerrarConexion();} return usuario;
         }
 
         public List<Usuario> listarUsuarios()
@@ -102,6 +119,12 @@ namespace DaoImpl
             try
             {
                 datos.setConsulta(spModificar);
+                datos.setParametro("@idusuarioModificar", usuario.id);
+                datos.setParametro("@usuario", usuario.usuario);
+                //datos.setParametro("@contrasenia", usuario.contrasenia);
+                datos.setParametro("@id_tipo_usuario", usuario.tipoUsuario.Id);
+                datos.setParametro("@idusuarioAuditoria", userLogged.id);
+                datos.execAccion();
             }
             catch (Exception ex)
             {

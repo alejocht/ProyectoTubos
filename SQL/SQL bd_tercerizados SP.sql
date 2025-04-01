@@ -847,6 +847,15 @@ BEGIN
 END;
 GO
 
+--Lecturas Individuales
+
+CREATE PROCEDURE SP_ObtenerUsuario(@id_input int)
+AS
+BEGIN
+	SELECT * FROM VW_Usuarios WHERE id = @id_input
+END;
+GO
+
 
 
 

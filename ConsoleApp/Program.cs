@@ -15,8 +15,10 @@ namespace ConsoleApp
             UsuarioDao dao = new UsuarioDao();
             Usuario usuarioLog = new Usuario();
             Usuario usuarioNuevo2 = new Usuario();
-            usuarioNuevo2.id = 3;
+            usuarioNuevo2 = dao.listarUsuario(3);
+            usuarioNuevo2.usuario = "nombreCambiado";
             usuarioLog.id = 1;
+            dao.modificarUsuario(usuarioNuevo2, usuarioLog);
             users = dao.listarUsuarios();
             foreach (Usuario usuario in users)
             {
